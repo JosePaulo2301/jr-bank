@@ -14,20 +14,22 @@ import java.util.List;
 
 public class ContaDAO {
 
- private final String url = "jdbc:postgresql://localhost:5432/banco";
-    private final String user = "postgres";
-    private final String password = "postgres"; // ajuste para sua senha
+ private final String url = "jdbc:mysql://localhost:3306/banco";
+    private final String user = "root";
+    private final String password = "root123";
 
     private Connection conectar() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
+
+
 
     public void salvar(Conta conta) {
         String sqlCliente = "INSERT INTO cliente (nome, cpf) VALUES (?, ?) RETURNING id";
         String sqlConta = "INSERT INTO conta (numero, saldo, tipo, cliente_id) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = conectar()) {
-            conn.setAutoCommit(false);
+           // conn.setAutoCommit(false);
 
             int clienteId;
             try (PreparedStatement ps = conn.prepareStatement(sqlCliente)) {
