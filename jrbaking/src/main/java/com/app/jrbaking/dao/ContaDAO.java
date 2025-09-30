@@ -1,9 +1,5 @@
-package app.dao;
+package com.app.jrbaking.dao;
 
-import app.model.Cliente;
-import app.model.Conta;
-import app.model.ContaCorrente;
-import app.model.ContaPoupanca;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.app.jrbaking.model.Cliente;
+import com.app.jrbaking.model.Conta;
+import com.app.jrbaking.model.ContaCorrente;
+import com.app.jrbaking.model.ContaPoupanca;
 
 public class ContaDAO {
 

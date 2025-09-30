@@ -1,4 +1,4 @@
-package app.model;
+package com.app.jrbaking.model;
 
 public class Cliente {
     private String nome;
