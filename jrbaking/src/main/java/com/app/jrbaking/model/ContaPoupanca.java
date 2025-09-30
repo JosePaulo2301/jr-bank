@@ -1,4 +1,4 @@
-package app.model;
+package com.app.jrbaking.model;
 
 public class ContaPoupanca extends Conta {
         private double rendimento = 0.02;
