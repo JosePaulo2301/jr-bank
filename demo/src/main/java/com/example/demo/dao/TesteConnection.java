@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 public class TesteConnection {
     
-    public static String url = "jdbc:mysql://localhost:3306/banco";
+    
+    public static String url = "jdbc:mysql://localhost:3306/banco?useSSL=false&serverTimezone=UTC";
     public static String user = "root";
     public static String password = "root123";
 
