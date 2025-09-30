@@ -1,4 +1,5 @@
 package app.dao;
+
 import app.model.Cliente;
 import app.model.Conta;
 import app.model.ContaCorrente;
@@ -14,30 +15,40 @@ import java.util.List;
 
 public class ContaDAO {
 
- private final String url = "jdbc:mysql://localhost:3306/banco";
+    private final String url = "jdbc:mysql://localhost:3306/banco?useSSL=false&serverTimezone=UTC";
     private final String user = "root";
-    private final String password = "root123";
+    private final String password = ""; // ajuste para a senha correta
 
     private Connection conectar() throws SQLException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Driver do MySQL nao encontrado no classpath", e);
+        }
         return DriverManager.getConnection(url, user, password);
     }
 
-
-
     public void salvar(Conta conta) {
-        String sqlCliente = "INSERT INTO cliente (nome, cpf) VALUES (?, ?) RETURNING id";
+        String sqlCliente = "INSERT INTO cliente (nome, cpf) VALUES (?, ?)";
         String sqlConta = "INSERT INTO conta (numero, saldo, tipo, cliente_id) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = conectar()) {
-           // conn.setAutoCommit(false);
+            conn.setAutoCommit(false);
 
             int clienteId;
-            try (PreparedStatement ps = conn.prepareStatement(sqlCliente)) {
+            try (PreparedStatement ps = conn.prepareStatement(sqlCliente, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, conta.getTitular().getNome());
                 ps.setString(2, conta.getTitular().getCpf());
-                ResultSet rs = ps.executeQuery();
-                rs.next();
-                clienteId = rs.getInt("id");
+                ps.executeUpdate();
+
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        clienteId = rs.getInt(1);
+                    } else {
+                        conn.rollback();
+                        throw new SQLException("Falha ao obter id gerado para cliente");
+                    }
+                }
             }
 
             try (PreparedStatement ps = conn.prepareStatement(sqlConta)) {

@@ -7,7 +7,7 @@ services:
       MYSQL_ROOT_PASSWORD: root123
       MYSQL_DATABASE: banco
       MYSQL_USER: root
-      MYSQL_PASSWORD: 123
+      MYSQL_PASSWORD: root123
     ports:
       - "3306:3306"
     volumes:
