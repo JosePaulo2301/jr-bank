@@ -1,6 +1,7 @@
 package com.app.jrbank.service;
 
 import com.app.jrbank.dao.ContaRepositoryMemoria;
+import com.app.jrbank.exception.SaldoInsuficienteException;
 import com.app.jrbank.model.Cliente;
 import com.app.jrbank.model.Conta;
 import com.app.jrbank.model.ContaCorrente;
@@ -22,10 +23,10 @@ public class ContaServiceTest {
 
     @BeforeEach
     void setup() {
-        repo = new ContaRepositoryMemoria();
+        repo    = new ContaRepositoryMemoria();
         service = new ContaService(repo);
 
-        Cliente maria = new Cliente("maria","11111111");
+        Cliente maria = new Cliente("maria","111111111111");
         Cliente joao = new Cliente("joao","222222222222");
 
         contaOrigem = new ContaCorrente(1001, maria);
@@ -43,5 +44,15 @@ public class ContaServiceTest {
 
         assertEquals(300, contaOrigem.getSaldo());
         assertEquals(200, contaDestino.getSaldo());
+    }
+
+    @Test
+    void deveLancerExecaoQuandoSaldoInsuficiente() {
+        assertThrows(SaldoInsuficienteException.class, () -> service.transferir(1001,1002,1000));
+    }
+
+    @Test
+    void deveLancarExcecaoQuandoContaNaoExiste() {
+        assertThrows(IllegalArgumentException.class, () -> service.transferir(9999,1002,100));
     }
 }
