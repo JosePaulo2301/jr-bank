@@ -1,4 +1,4 @@
-package com.app.jrbaking.dao;
+package com.app.jrbank.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

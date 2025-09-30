@@ -1,7 +1,7 @@
-package com.app.jrbaking.service;
+package com.app.jrbank.service;
 
-import com.app.jrbaking.dao.ContaDAO;
-import com.app.jrbaking.model.Conta;
+import com.app.jrbank.dao.ContaDAO;
+import com.app.jrbank.model.Conta;
 
 public class BancoService {
     private final ContaDAO contaDAO = new ContaDAO();
