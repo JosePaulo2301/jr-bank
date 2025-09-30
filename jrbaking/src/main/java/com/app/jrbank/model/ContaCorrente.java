@@ -1,4 +1,4 @@
-package com.app.jrbaking.model;
+package com.app.jrbank.model;
 
 public class ContaCorrente extends Conta {
     private double taxa = 1.50;

@@ -1,4 +1,4 @@
-package com.app.jrbaking;
+package com.app.jrbank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

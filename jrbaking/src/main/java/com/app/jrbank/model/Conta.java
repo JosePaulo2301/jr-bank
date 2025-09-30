@@ -1,4 +1,4 @@
-package com.app.jrbaking.model;
+package com.app.jrbank.model;
 
 
 public abstract class Conta {
@@ -13,19 +13,14 @@ private int numero;
     }
 
     public void depositar(double valor) {
-        if (valor > 0) {
+        if (valor <= 0) throw new IllegalArgumentException("Valor deve ser positivo");
             saldo += valor;
-            System.out.println("Depósito de R$" + valor + " realizado.");
-        }
     }
 
     public void sacar(double valor) {
-        if (valor <= saldo) {
+        if (valor <= 0)     throw new IllegalArgumentException("Valor deve ser positivo");
+        if (saldo < valor)  throw new RuntimeException("Saldo insuficiente");
             saldo -= valor;
-            System.out.println("Saque de R$" + valor + " realizado.");
-        } else {
-            System.out.println("Saldo insuficiente.");
-        }
     }
 
     public void transferir(double valor, Conta destino) {
@@ -38,17 +33,11 @@ private int numero;
         }
     }
 
-    public int getNumero() {
-        return numero;
-    }
+    public int getNumero() { return numero; }
 
-    public double getSaldo() {
-        return saldo;
-    }
+    public double getSaldo() { return saldo; }
 
-    public Cliente getTitular() {
-        return titular;
-    }
+    public Cliente getTitular() { return titular; }
 
     @Override
     public String toString() {
