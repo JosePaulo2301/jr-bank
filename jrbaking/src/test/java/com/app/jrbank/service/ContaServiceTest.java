@@ -29,8 +29,8 @@ public class ContaServiceTest {
         Cliente maria = new Cliente("maria","111111111111");
         Cliente joao = new Cliente("joao","222222222222");
 
-        contaOrigem = new ContaCorrente(1001, maria);
-        contaDestino = new ContaPoupanca(1002, joao);
+        //contaOrigem = new ContaCorrente(1001, maria);
+       // contaDestino = new ContaPoupanca(1002, joao);
 
         contaOrigem.depositar(500);
 

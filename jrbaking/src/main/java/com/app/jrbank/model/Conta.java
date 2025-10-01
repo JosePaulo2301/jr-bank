@@ -1,8 +1,8 @@
 package com.app.jrbank.model;
 
 
-public abstract class Conta {
-private int numero;
+public  class Conta {
+    private int numero;
     private double saldo;
     private Cliente titular;
 
@@ -41,6 +41,6 @@ private int numero;
 
     @Override
     public String toString() {
-        return "Conta nº " + numero + " | Titular: " + titular.getNome() + " | Saldo: R$" + saldo;
+        return "Conta nº " + this.numero + " | Titular: " + titular.getNome() + " | Saldo: R$" + this.saldo;
     }
 }
