@@ -1,14 +1,15 @@
 package com.app.jrbank.model;
 
-import com.app.jrbank.service.RendimentoService;
+import com.app.jrbank.exception.SaldoInsuficienteException;
 
-public class ContaPoupanca implements  ContaBase{
-        private final ContaBase contaBase;
-        private final RendimentoService rendimentoService;
+public class ContaPremium implements ContaBase {
+    private final ContaBase contaBase;
+    private final double limiteEspecial;
 
-    public ContaPoupanca(ContaBase contaBase, double taxaRendimento) {
+
+    public ContaPremium(ContaBase contaBase, double limiteEspecial) {
         this.contaBase = contaBase;
-        this.rendimentoService = new RendimentoService(taxaRendimento);
+        this.limiteEspecial = limiteEspecial;
     }
 
     @Override
@@ -18,6 +19,9 @@ public class ContaPoupanca implements  ContaBase{
 
     @Override
     public void sacar(double valor) {
+        if(contaBase.getSaldo() + limiteEspecial < valor) {
+            throw  new SaldoInsuficienteException("Saldo insuficiente, mesmo com limite especial");
+        }
         contaBase.sacar(valor);
     }
 
@@ -34,10 +38,5 @@ public class ContaPoupanca implements  ContaBase{
     @Override
     public Cliente getTitular() {
         return contaBase.getTitular();
-    }
-
-    public void aplicarRendimento() {
-        double rendimento = rendimentoService.calcular(getSaldo());
-        contaBase.depositar(rendimento);
     }
 }

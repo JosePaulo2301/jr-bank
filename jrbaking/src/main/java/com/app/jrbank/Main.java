@@ -1,26 +1,28 @@
 package com.app.jrbank;
 
-import com.app.jrbank.model.Cliente;
-import com.app.jrbank.model.ContaCorrente;
-import com.app.jrbank.model.ContaPoupanca;
+import com.app.jrbank.model.*;
 
 public class Main {
 
     public static void main(String[] args) {
         Cliente maria = new Cliente("Maria", "11111111111");
-        Cliente joao = new Cliente("João", "22222222222");
 
-        ContaCorrente cc = new ContaCorrente(1001, maria, 1.50);
-        ContaPoupanca cp = new ContaPoupanca(1002, joao, 0.02);
+        ContaBase contaNormal = new ContaNormal(1001, maria);
 
+        ContaBase contaPremium = new ContaPremium(new ContaNormal(1002, maria), 500);
+        ContaPoupanca contaPoupanca = new ContaPoupanca(new ContaNormal(1003, maria), 0.02);
 
-        cc.depositar(500);
-        cc.sacar(200);
+        contaNormal.depositar(500);
+        contaNormal.sacar(200);
+        System.out.println("Conta normal saldo: " + contaNormal.getSaldo());
 
-        cp.depositar(300);
+        contaPremium.depositar(100);
+        contaPremium.sacar(550); // aceita limite especial
+        System.out.println("Conta premium saldo: " + contaPremium.getSaldo());
 
-        System.out.println(cc);
-        System.out.println(cp);
+        contaPoupanca.depositar(1000);
+        contaPoupanca.aplicarRendimento(); // 2% de rendimento
+        System.out.println("Conta poupança saldo: " + contaPoupanca.getSaldo());
 
     }
 }
