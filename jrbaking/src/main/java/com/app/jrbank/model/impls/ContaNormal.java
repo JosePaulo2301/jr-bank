@@ -1,4 +1,6 @@
-package com.app.jrbank.model;
+package com.app.jrbank.model.impls;
+
+import com.app.jrbank.model.Cliente;
 
 public class ContaNormal implements ContaBase {
 
@@ -21,8 +23,11 @@ public class ContaNormal implements ContaBase {
 
     @Override
     public void sacar(double valor) {
-        if (saldo < valor) throw new RuntimeException("Saldo insuficiente");
-        saldo -= valor;
+        if (saldo > valor) {
+            saldo -= valor;
+        } else {
+            throw new RuntimeException("Saldo insuficiente");
+        }
     }
 
     @Override

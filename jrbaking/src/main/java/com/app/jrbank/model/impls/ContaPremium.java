@@ -1,6 +1,7 @@
-package com.app.jrbank.model;
+package com.app.jrbank.model.impls;
 
 import com.app.jrbank.exception.SaldoInsuficienteException;
+import com.app.jrbank.model.Cliente;
 
 public class ContaPremium implements ContaBase {
     private final ContaBase contaBase;
@@ -20,7 +21,7 @@ public class ContaPremium implements ContaBase {
     @Override
     public void sacar(double valor) {
         if(contaBase.getSaldo() + limiteEspecial < valor) {
-            throw  new SaldoInsuficienteException("Saldo insuficiente, mesmo com limite especial");
+            throw new SaldoInsuficienteException("Saldo insuficiente, mesmo com limite especial");
         }
         contaBase.sacar(valor);
     }
