@@ -4,8 +4,6 @@ import com.app.jrbank.dao.ContaRepositoryMemoria;
 import com.app.jrbank.exception.SaldoInsuficienteException;
 import com.app.jrbank.model.Cliente;
 import com.app.jrbank.model.Conta;
-import com.app.jrbank.model.ContaCorrente;
-import com.app.jrbank.model.ContaPoupanca;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +26,6 @@ public class ContaServiceTest {
 
         Cliente maria = new Cliente("maria","111111111111");
         Cliente joao = new Cliente("joao","222222222222");
-
-        contaOrigem = new ContaCorrente(1001, maria);
-        contaDestino = new ContaPoupanca(1002, joao);
 
         contaOrigem.depositar(500);
 

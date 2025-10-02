@@ -1,9 +1,12 @@
 package com.app.jrbank.model;
 
 public class Cliente {
-    private final String nome;
-    private final String cpf;
+    private String nome;
+    private String cpf;
 
+    public Cliente() {
+
+    }
     public Cliente(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
