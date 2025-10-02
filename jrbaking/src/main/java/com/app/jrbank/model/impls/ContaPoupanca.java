@@ -1,8 +1,9 @@
-package com.app.jrbank.model;
+package com.app.jrbank.model.impls;
 
+import com.app.jrbank.model.Cliente;
 import com.app.jrbank.service.RendimentoService;
 
-public class ContaPoupanca implements  ContaBase{
+public class ContaPoupanca implements ContaBase {
         private final ContaBase contaBase;
         private final RendimentoService rendimentoService;
 
