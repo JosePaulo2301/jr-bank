@@ -20,10 +20,22 @@ public class ContaPremium implements ContaBase {
 
     @Override
     public void sacar(double valor) {
+        if(valor <= 0) {
+            throw new IllegalArgumentException("Valor deve ser positivo");
+        }
+        
         if(contaBase.getSaldo() + limiteEspecial < valor) {
             throw new SaldoInsuficienteException("Saldo insuficiente, mesmo com limite especial");
         }
-        contaBase.sacar(valor);
+        
+        double saldoAtual = contaBase.getSaldo();
+        if(saldoAtual >= valor) {
+            contaBase.sacar(valor);
+        } else {
+            if(saldoAtual > 0) {
+                contaBase.sacar(saldoAtual);
+            }
+        }
     }
 
     @Override

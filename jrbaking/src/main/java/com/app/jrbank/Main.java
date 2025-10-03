@@ -22,11 +22,11 @@ public class Main {
 
         contaPremium.depositar(100);
         contaPremium.sacar(550); // aceita limite especial
-        //System.out.println("Conta premium saldo: " + contaPremium.getSaldo());
+        System.out.println("Conta premium saldo: " + contaPremium.getSaldo());
 
         contaPoupanca.depositar(1000);
         contaPoupanca.aplicarRendimento(); // 2% de rendimento
-       // System.out.println("Conta poupança saldo: " + contaPoupanca.getSaldo());
+        System.out.println("Conta poupança saldo: " + contaPoupanca.getSaldo());
 
     }
 }
