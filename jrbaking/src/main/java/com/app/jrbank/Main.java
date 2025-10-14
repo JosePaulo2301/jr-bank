@@ -1,10 +1,7 @@
 package com.app.jrbank;
 
 import com.app.jrbank.model.*;
-import com.app.jrbank.model.impls.ContaBase;
-import com.app.jrbank.model.impls.ContaNormal;
-import com.app.jrbank.model.impls.ContaPoupanca;
-import com.app.jrbank.model.impls.ContaPremium;
+import com.app.jrbank.model.impls.*;
 
 public class Main {
 
@@ -27,6 +24,11 @@ public class Main {
         contaPoupanca.depositar(1000);
         contaPoupanca.aplicarRendimento();
         System.out.println("Conta poupança saldo: " + contaPoupanca.getSaldo());
+
+        System.out.println("----------------------------------");
+        ContaComTarifa contaComTarifa = new ContaComTarifa(contaNormal, 15.0);
+        contaComTarifa.aplicarTarifaMensal();
+
 
     }
 }

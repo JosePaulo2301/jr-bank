@@ -1,0 +1,92 @@
+@startuml
+class com.app.jrbank.model.impls.ContaNormal {
+- int numero
+- double saldo
+- Cliente titular
++ <<Create>> ContaNormal(int,Cliente)
++ void depositar(double)
++ void sacar(double)
++ double getSaldo()
++ int getNumero()
++ Cliente getTitular()
+}
+
+
+class com.app.jrbank.model.Cliente {
+- String nome
+- String cpf
++ <<Create>> Cliente()
++ <<Create>> Cliente(String,String)
++ String getNome()
++ String getCpf()
++ String toString()
+}
+
+
+class com.app.jrbank.model.Conta {
+- int numero
+- double saldo
+- Cliente titular
++ <<Create>> Conta(int,Cliente)
++ void depositar(double)
++ void sacar(double)
++ void transferir(double,Conta)
++ int getNumero()
++ double getSaldo()
++ Cliente getTitular()
++ String toString()
+}
+
+
+class com.app.jrbank.model.impls.ContaPoupanca {
+- ContaBase contaBase
+- RendimentoService rendimentoService
++ <<Create>> ContaPoupanca(ContaBase,double)
++ void depositar(double)
++ void sacar(double)
++ double getSaldo()
++ int getNumero()
++ Cliente getTitular()
++ void aplicarRendimento()
+}
+
+
+class com.app.jrbank.model.impls.ContaPremium {
+- ContaBase contaBase
+- double limiteEspecial
++ <<Create>> ContaPremium(ContaBase,double)
++ void depositar(double)
++ void sacar(double)
++ double getSaldo()
++ int getNumero()
++ Cliente getTitular()
+}
+
+
+class com.app.jrbank.model.ContaCorrente {
+- Conta contaBase
+- TaxaService taxaService
++ <<Create>> ContaCorrente(int,Cliente,double)
++ void depositar(double)
++ void sacar(double)
++ int getNumero()
++ double getSaldo()
++ Cliente getTitular()
++ String toString()
+}
+
+
+interface com.app.jrbank.model.impls.ContaBase {
+~ void depositar(double)
+~ void sacar(double)
+~ double getSaldo()
+~ int getNumero()
+~ Cliente getTitular()
+}
+
+
+
+com.app.jrbank.model.impls.ContaBase <|.. com.app.jrbank.model.impls.ContaNormal
+com.app.jrbank.model.impls.ContaBase <|.. com.app.jrbank.model.impls.ContaPoupanca
+com.app.jrbank.model.impls.ContaBase <|.. com.app.jrbank.model.impls.ContaPremium
+@enduml
