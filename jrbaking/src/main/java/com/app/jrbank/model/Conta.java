@@ -12,6 +12,12 @@ public  class Conta {
         this.saldo = 0.0;
     }
 
+    public Conta(int numero,  double saldo) {
+        this.numero = numero;
+        this.saldo = 0.0;
+
+    }
+
     public void depositar(double valor) {
         if (valor <= 0) throw new IllegalArgumentException("Valor deve ser positivo");
             saldo += valor;

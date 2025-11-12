@@ -6,12 +6,13 @@ import com.app.jrbank.repository.ContaRepository;
 
 public class ContaService {
 
-    private final ContaRepository contaRepository;
+    private ContaRepository contaRepository;
 
     public ContaService(ContaRepository contaRepository) {
         this.contaRepository = contaRepository;
     }
 
+    public ContaService() {}
 
     public void transferir(int origem, int destino, double valor) throws SaldoInsuficienteException {
         Conta contaOrigem = contaRepository.buscarPorNumero(origem);
