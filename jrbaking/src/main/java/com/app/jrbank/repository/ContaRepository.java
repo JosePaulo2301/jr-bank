@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface ContaRepository {
     void salvar(Conta conta);
+
     Conta buscarPorNumero(int numero);
+
     List<Conta> listarTodas();
+
 }

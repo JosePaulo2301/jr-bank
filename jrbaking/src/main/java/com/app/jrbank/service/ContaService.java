@@ -12,7 +12,8 @@ public class ContaService {
         this.contaRepository = contaRepository;
     }
 
-    public ContaService() {}
+    public ContaService() {
+    }
 
     public void transferir(int origem, int destino, double valor) throws SaldoInsuficienteException {
         Conta contaOrigem = contaRepository.buscarPorNumero(origem);

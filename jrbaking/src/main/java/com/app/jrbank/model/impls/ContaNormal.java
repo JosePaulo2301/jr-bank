@@ -15,10 +15,15 @@ public class ContaNormal implements ContaBase {
         this.saldo = 0.0;
     }
 
+    public ContaNormal(int numero, double saldo) {
+        this.numero = numero;
+        this.saldo = 0.0;
+    }
 
     @Override
     public void depositar(double valor) {
-        if (valor <= 0) throw new IllegalArgumentException("Valor deve ser positivo");
+        if (valor <= 0)
+            throw new IllegalArgumentException("Valor deve ser positivo");
         saldo += valor;
     }
 
@@ -48,4 +53,5 @@ public class ContaNormal implements ContaBase {
     public Cliente getTitular() {
         return titular;
     }
+
 }

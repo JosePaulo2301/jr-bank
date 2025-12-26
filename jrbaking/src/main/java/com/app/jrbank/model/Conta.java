@@ -1,7 +1,6 @@
 package com.app.jrbank.model;
 
-
-public  class Conta {
+public class Conta {
     private int numero;
     private double saldo;
     private Cliente titular;
@@ -12,38 +11,47 @@ public  class Conta {
         this.saldo = 0.0;
     }
 
-    public Conta(int numero,  double saldo) {
+    public Conta(int numero, double saldo) {
         this.numero = numero;
         this.saldo = 0.0;
 
     }
 
     public void depositar(double valor) {
-        if (valor <= 0) throw new IllegalArgumentException("Valor deve ser positivo");
-            saldo += valor;
+        if (valor <= 0)
+            throw new IllegalArgumentException("Valor deve ser positivo");
+        saldo += valor;
     }
 
     public void sacar(double valor) {
-        if (valor <= 0)     throw new IllegalArgumentException("Valor deve ser positivo");
-        if (saldo < valor)  throw new RuntimeException("Saldo insuficiente");
-            saldo -= valor;
+        if (valor <= 0)
+            throw new IllegalArgumentException("Valor deve ser positivo");
+        if (saldo < valor)
+            throw new RuntimeException("Saldo insuficiente");
+        saldo -= valor;
     }
 
     public void transferir(double valor, Conta destino) {
-        if (valor <= saldo) {
-            this.sacar(valor);
-            destino.depositar(valor);
-            System.out.println("Transferência de R$" + valor + " para conta " + destino.getNumero() + " realizada.");
-        } else {
-            System.out.println("Saldo insuficiente para transferência.");
-        }
+        if (valor <= 0)
+            throw new IllegalArgumentException("Valor deve ser positivo");
+        if (valor > saldo)
+            throw new RuntimeException("Saldo insuficiente para transferência");
+        this.sacar(valor);
+        destino.depositar(valor);
+        System.out.println("Transferência de R$" + valor + " para conta " + destino.getNumero() + " realizada.");
     }
 
-    public int getNumero() { return numero; }
+    public int getNumero() {
+        return numero;
+    }
 
-    public double getSaldo() { return saldo; }
+    public double getSaldo() {
+        return saldo;
+    }
 
-    public Cliente getTitular() { return titular; }
+    public Cliente getTitular() {
+        return titular;
+    }
 
     @Override
     public String toString() {
