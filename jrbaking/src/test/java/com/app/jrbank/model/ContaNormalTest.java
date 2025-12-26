@@ -14,28 +14,23 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class ContaNormalTest {
 
     @Mock
-    private final ContaRepository contaRepository;
+    private ContaRepository contaRepository;
 
     @InjectMocks
     private ContaService contaService;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-    public ContaNormalTest(ContaRepository contaRepository) {
-        this.contaRepository = contaRepository;
-    }
-
 
     @Test
-    void deveDEpositarCorretamente() {
-        Cliente maria = new Cliente("maira","11");
-        ContaBase conta = new ContaNormal(1001,maria);
+    void deveDepositarCorretamente() {
+        Cliente maria = new Cliente("maira", "11");
+        ContaBase conta = new ContaNormal(1001, maria);
 
         conta.depositar(200);
 
@@ -58,22 +53,19 @@ public class ContaNormalTest {
         // Arrange
         int origem = 1002;
         int destino = 1003;
-        double valor = 0.00;
+        double valor = 0.15;
 
-        Conta contaOrigem = new Conta(1002,0.50);
+        Conta contaOrigem = new Conta(1002, 0.50);
         Conta contaDestino = new Conta(1003, 0.50);
-
 
         Mockito.when(contaRepository.buscarPorNumero(origem)).thenReturn(contaOrigem);
         Mockito.when(contaRepository.buscarPorNumero(destino)).thenReturn(contaDestino);
 
         assertThrows(SaldoInsuficienteException.class,
-                ()-> contaService.transferir(
+                () -> contaService.transferir(
                         contaOrigem.getNumero(),
                         contaDestino.getNumero(),
-                        valor
-                        ));
+                        valor));
     }
-
 
 }
