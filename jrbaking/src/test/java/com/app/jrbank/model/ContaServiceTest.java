@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.context.annotation.Description;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,6 +66,8 @@ public class ContaServiceTest {
     }
 
     @Test
+    @Description("asdf")
+    
     void transferir_DeveTransferirValor_QuandoSaldoSuficiente() throws SaldoInsuficienteException {
         Conta contaOrigem = new Conta(1, 100.0);
         Conta contaDestino = new Conta(2, 50.0);

@@ -1,5 +1,7 @@
 package com.app.jrbank.model;
 
+import com.app.jrbank.exception.SaldoInsuficienteException;
+
 public class Conta {
     private int numero;
     private double saldo;
@@ -13,13 +15,13 @@ public class Conta {
 
     public Conta(int numero, double saldo) {
         this.numero = numero;
-        this.saldo = 0.0;
+        this.saldo = saldo;
 
     }
 
     public void depositar(double valor) {
         if (valor <= 0)
-            throw new IllegalArgumentException("Valor deve ser positivo");
+            throw new SaldoInsuficienteException("Valor deve ser positivo");
         saldo += valor;
     }
 
@@ -27,7 +29,7 @@ public class Conta {
         if (valor <= 0)
             throw new IllegalArgumentException("Valor deve ser positivo");
         if (saldo < valor)
-            throw new RuntimeException("Saldo insuficiente");
+            throw new SaldoInsuficienteException("Saldo insuficiente");
         saldo -= valor;
     }
 
@@ -35,7 +37,7 @@ public class Conta {
         if (valor <= 0)
             throw new IllegalArgumentException("Valor deve ser positivo");
         if (valor > saldo)
-            throw new RuntimeException("Saldo insuficiente para transferência");
+            throw new SaldoInsuficienteException("Saldo insuficiente para transferência");
         this.sacar(valor);
         destino.depositar(valor);
         System.out.println("Transferência de R$" + valor + " para conta " + destino.getNumero() + " realizada.");
