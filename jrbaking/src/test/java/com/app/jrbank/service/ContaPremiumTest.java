@@ -1,4 +1,4 @@
-package com.app.jrbank.model;
+package com.app.jrbank.service;
 
 public class ContaPremiumTest {
 }

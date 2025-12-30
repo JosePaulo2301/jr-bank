@@ -1,7 +1,8 @@
 package com.app.jrbank;
 
-import com.app.jrbank.model.*;
+import com.app.jrbank.model.Cliente;
 import com.app.jrbank.model.impls.*;
+import com.app.jrbank.service.*;
 
 public class Main {
 

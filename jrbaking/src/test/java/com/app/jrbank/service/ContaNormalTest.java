@@ -1,6 +1,8 @@
-package com.app.jrbank.model;
+package com.app.jrbank.service;
 
 import com.app.jrbank.exception.SaldoInsuficienteException;
+import com.app.jrbank.model.Cliente;
+import com.app.jrbank.model.Conta;
 import com.app.jrbank.model.impls.ContaBase;
 import com.app.jrbank.model.impls.ContaNormal;
 import com.app.jrbank.repository.ContaRepository;
@@ -50,13 +52,12 @@ public class ContaNormalTest {
     @Test
     void deveGerarExceptionSaldoInsuficiente() {
 
-        // Arrange
         int origem = 1002;
         int destino = 1003;
-        double valor = 0.15;
+        double valor = 100;
 
-        Conta contaOrigem = new Conta(1002, 0.50);
-        Conta contaDestino = new Conta(1003, 0.50);
+        Conta contaOrigem = new Conta(1002, 40.0);
+        Conta contaDestino = new Conta(1003, 40.0);
 
         Mockito.when(contaRepository.buscarPorNumero(origem)).thenReturn(contaOrigem);
         Mockito.when(contaRepository.buscarPorNumero(destino)).thenReturn(contaDestino);
