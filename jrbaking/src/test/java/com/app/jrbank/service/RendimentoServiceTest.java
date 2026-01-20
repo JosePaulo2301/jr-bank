@@ -26,7 +26,7 @@ public class RendimentoServiceTest {
     }
 
     @Test
-    void testCalculoCorretoRendimento() {
+    void testCalculo_Correto_Rendimento() {
         // Exemplo: valor inicial 1000, taxa 0.05 (5%), período 1 ano
         // Arrange
         double valorInicial = 1000.0;
@@ -42,7 +42,7 @@ public class RendimentoServiceTest {
     }
 
     @Test
-    void testeComportamentoValoresExtremos() {
+    void test_Comportamento_Valores_Extremos() {
         // Ex: testando valor alto para ver se é estourado o limite de double
         // Arrange
         double valorInicial = 1_000_000_000;
@@ -58,7 +58,7 @@ public class RendimentoServiceTest {
     }
 
     @Test
-    void testCalcularComValorNulo() {
+    void test_Calcular_Com_ValorNulo() {
         RendimentoService rendimentoService = new RendimentoService();
         rendimentoService.setTaxaRendimento(0.5);
 
