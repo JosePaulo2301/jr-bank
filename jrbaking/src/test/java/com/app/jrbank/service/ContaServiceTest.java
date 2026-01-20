@@ -1,6 +1,7 @@
-package com.app.jrbank.model;
+package com.app.jrbank.service;
 
 import com.app.jrbank.exception.SaldoInsuficienteException;
+import com.app.jrbank.model.Conta;
 import com.app.jrbank.repository.ContaRepository;
 import com.app.jrbank.service.ContaService;
 
