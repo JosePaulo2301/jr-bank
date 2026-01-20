@@ -50,11 +50,11 @@ public class ContaNormalTest {
     }
 
     @Test
-    void deveGerarExceptionSaldoInsuficiente() {
+    void deveGerarExceptionSaldoInsuficiente() throws SaldoInsuficienteException {
 
         int origem = 1002;
         int destino = 1003;
-        double valor = 100;
+        double valor = 0.15;
 
         Conta contaOrigem = new Conta(1002, 40.0);
         Conta contaDestino = new Conta(1003, 40.0);
