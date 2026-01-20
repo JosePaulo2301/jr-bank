@@ -1,6 +1,9 @@
 jr-baking.iml
 .vscode/
 /.idea/
+.idea/
+.m2/
+.m2
 ##############################
 ## Java
 ##############################
@@ -54,7 +57,7 @@ out/
 .settings/
 bin/
 tmp/
-.metadata
+.metadata/
 .classpath
 .project
 *.tmp
@@ -86,6 +89,11 @@ nb-configuration.xml
 ## OS X
 ##############################
 .DS_Store
+
+##############################
+## Maven Local Repository
+##############################
+.m2/
 
 ##############################
 ## Miscellaneous
