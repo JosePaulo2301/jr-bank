@@ -10,6 +10,5 @@ public interface ContaBase {
     double getSaldo();
 
     int getNumero();
-
     Cliente getTitular();
 }

@@ -33,6 +33,13 @@ public class ContaBaseTestImpl implements ContaBase {
       saldo -= valor;
 
     }
+    public static void limiteChequeEspecial(double valor) {
+            if (saldo <= 0)  {
+               saldo+=valor; 
+            } else {
+                throw new IllegalArgumentException("Limite de cheque especial não disponível");
+            }
+    }
 
     @Override
     public double getSaldo() {

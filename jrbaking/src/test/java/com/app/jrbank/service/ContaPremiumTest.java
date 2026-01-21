@@ -74,7 +74,7 @@ public class ContaPremiumTest {
     }
 
     @Test
-    void teste_NaoDeveDebitarValorNegativo() {
+    void teste_NaoDeveDebitarSaldoMenorQueValorADebitar() {
         double valorDepositado = 1000.00;
         double valorDebitado = 1_000_000_000;
         
@@ -87,4 +87,29 @@ public class ContaPremiumTest {
     }
 
 
+    @Test
+    void teste_NaoDeveDebitarValorNegativo() {
+        double valorDepositado = 1000.00;
+        double valorDebitado = -1;
+        
+        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
+        
+        contaBase.depositar(valorDepositado);
+        
+        assertThrows(IllegalArgumentException.class, () -> contaBase.sacar(valorDebitado), "Não deve sacar com valor negativo");
+        
+    }
+
+    @Test
+    void teste_limiteChequeEspecial() {
+        double valorDepositado = 0;
+        double valorDebitado = -1;
+        
+        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
+        
+        contaBase.depositar(valorDepositado);
+        
+        
+        
+    }
 }
