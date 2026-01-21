@@ -25,12 +25,20 @@ public class ContaBaseTestImpl implements ContaBase {
     @Override
     public void sacar(double valor) {
         if(valor <= 0) {
-            throw new IllegalArgumentException("não ha saldo suficiente para sacar..");
-        } else if (valor >= 0) {
-            saldo -= valor;
-        } else {
-            throw new SaldoInsuficienteException("Saldo insuficiente");
+            throw new IllegalArgumentException("O valor deve ser positivo..");
         }
+        if (valor > saldo) {
+            throw new SaldoInsuficienteException("Valor é superior ao saldo atual");
+        } 
+      saldo -= valor;
+
+    }
+    public static void limiteChequeEspecial(double valor) {
+            if (saldo <= 0)  {
+               saldo+=valor; 
+            } else {
+                throw new IllegalArgumentException("Limite de cheque especial não disponível");
+            }
     }
 
     @Override

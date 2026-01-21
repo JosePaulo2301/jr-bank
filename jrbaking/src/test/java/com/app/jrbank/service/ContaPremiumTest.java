@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.app.jrbank.exception.SaldoInsuficienteException;
 import com.app.jrbank.model.Cliente;
 import com.app.jrbank.model.impls.ContaBase;
 import com.app.jrbank.model.impls.ContaPremium;
@@ -59,10 +60,56 @@ public class ContaPremiumTest {
         contaBase.depositar(valorDepositoado);
         contaBase.depositar(50);
         assertEquals(1050.00, contaBase.getSaldo(), 0.00001, "Deve aumentar o saldo");
+        
+    }
+    @Test
+    void teste_Deve_SacarOValor() {
+        double valorDescontado = 100.00;
+        double valorDepositado = 1000.00;
+        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
 
+        contaBase.depositar(valorDepositado);
+        contaBase.sacar(valorDescontado);
+        assertEquals(900.00, contaBase.getSaldo(), 0.00001, "Deve debitar corretamente");
+    }
+
+    @Test
+    void teste_NaoDeveDebitarSaldoMenorQueValorADebitar() {
+        double valorDepositado = 1000.00;
+        double valorDebitado = 1_000_000_000;
+        
+        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
+        
+        contaBase.depositar(valorDepositado);
+        
+        assertThrows(SaldoInsuficienteException.class, () -> contaBase.sacar(valorDebitado), "Não deve sacar com valor negativo");
         
     }
 
-    
 
+    @Test
+    void teste_NaoDeveDebitarValorNegativo() {
+        double valorDepositado = 1000.00;
+        double valorDebitado = -1;
+        
+        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
+        
+        contaBase.depositar(valorDepositado);
+        
+        assertThrows(IllegalArgumentException.class, () -> contaBase.sacar(valorDebitado), "Não deve sacar com valor negativo");
+        
+    }
+
+    @Test
+    void teste_limiteChequeEspecial() {
+        double valorDepositado = 0;
+        double valorDebitado = -1;
+        
+        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
+        
+        contaBase.depositar(valorDepositado);
+        
+        
+        
+    }
 }
