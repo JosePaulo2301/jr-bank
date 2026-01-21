@@ -12,5 +12,4 @@ public interface ContaBase {
     int getNumero();
 
     Cliente getTitular();
-
 }

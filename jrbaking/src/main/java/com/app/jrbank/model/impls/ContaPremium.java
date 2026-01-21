@@ -6,6 +6,7 @@ import com.app.jrbank.model.Cliente;
 public class ContaPremium implements ContaBase {
     private final ContaBase contaBase;
     private final double limiteEspecial;
+    
 
 
     public ContaPremium(ContaBase contaBase, double limiteEspecial) {
@@ -52,4 +53,6 @@ public class ContaPremium implements ContaBase {
     public Cliente getTitular() {
         return contaBase.getTitular();
     }
+
+ 
 }
