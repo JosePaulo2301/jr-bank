@@ -27,33 +27,25 @@ public class RendimentoServiceTest {
 
     @Test
     void testCalculo_Correto_Rendimento() {
-        // Exemplo: valor inicial 1000, taxa 0.05 (5%), período 1 ano
-        // Arrange
+
         double valorInicial = 1000.0;
         double taxa = 0.05;
 
-        // Act - Quando o método ou função está em preparaçãopara o teste
         double esperado = valorInicial * Math.pow(taxa, valorInicial);
         double resultado = rendimentoService.calcular(valorInicial);
 
-        // Assert - verificando se os resultados obtidos batem com os resultados
-        // esperados
         assertEquals(esperado, resultado, "O rendimento deve ser calculado corretamente");
     }
 
     @Test
     void test_Comportamento_Valores_Extremos() {
-        // Ex: testando valor alto para ver se é estourado o limite de double
-        // Arrange
         double valorInicial = 1_000_000_000;
         double taxa = 0.05;
         rendimentoService.setTaxaRendimento(taxa);
 
-        // act
         double esperado = valorInicial * taxa;
         double resultado = rendimentoService.calcular(valorInicial);
 
-        // assert
         assertEquals(esperado, resultado, "Deve testtar a precisão");
     }
 
