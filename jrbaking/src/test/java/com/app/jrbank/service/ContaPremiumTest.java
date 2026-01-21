@@ -13,6 +13,7 @@ import com.app.jrbank.model.Cliente;
 import com.app.jrbank.model.impls.ContaBase;
 import com.app.jrbank.model.impls.ContaPremium;
 import com.app.jrbank.repository.ContaRepository;
+import com.app.jrbank.service.impls.ContaBaseTestImpl;
 
 public class ContaPremiumTest {
 
@@ -43,15 +44,25 @@ public class ContaPremiumTest {
 
     @Test
     @DisplayName("Deve depositoar corretamente")
-    void testDeposito() {
+    void teste_Deve_Depositar_Corretamente() {
         double saldoInicial = 1000.00;
-        double deposito = 1000.00;
-        ContaBase contaBaseMock = mock(ContaBase.class);
-        contaBaseMock.depositar(saldoInicial);
-        ContaPremium conta = new ContaPremium(contaBaseMock, deposito);
-
+        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
+        contaBase.depositar(saldoInicial);
+        ContaPremium conta = new ContaPremium(contaBase, 500.00);
         assertEquals(1000.00, conta.getSaldo(), 0.00001);
 
     }
+    @Test
+    void teste_Deve_AumentarOSaldo() {
+        double valorDepositoado = 1000.00;
+        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
+        contaBase.depositar(valorDepositoado);
+        contaBase.depositar(50);
+        assertEquals(1050.00, contaBase.getSaldo(), 0.00001, "Deve aumentar o saldo");
+
+        
+    }
+
+    
 
 }
