@@ -8,12 +8,17 @@ public class ContaBaseTestImpl implements ContaBase {
     private double saldo;
     private int numero;
     private Cliente titular;
+    private double limiteChequeEspecial;
 
 
     public ContaBaseTestImpl(Cliente titular, int numero) {
         this.titular = titular;
         this.numero = numero;
         this.saldo = 0.0;
+    }
+    public ContaBaseTestImpl(double saldo, double limiteChequeEspecial) {
+        this.saldo = saldo;
+        this.limiteChequeEspecial = limiteChequeEspecial;
     }
 
 
@@ -24,22 +29,22 @@ public class ContaBaseTestImpl implements ContaBase {
 
     @Override
     public void sacar(double valor) {
+
         if(valor <= 0) {
+            saldo -= valor;
             throw new IllegalArgumentException("O valor deve ser positivo..");
         }
-        if (valor > saldo) {
+
+        double disponivel = saldo + limiteChequeEspecial;
+
+        if (valor > disponivel) {
             throw new SaldoInsuficienteException("Valor é superior ao saldo atual");
-        } 
-      saldo -= valor;
+        }
+
+        saldo -= valor;
 
     }
-    public static void limiteChequeEspecial(double valor) {
-            if (saldo <= 0)  {
-               saldo+=valor; 
-            } else {
-                throw new IllegalArgumentException("Limite de cheque especial não disponível");
-            }
-    }
+
 
     @Override
     public double getSaldo() {
