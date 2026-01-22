@@ -101,15 +101,21 @@ public class ContaPremiumTest {
     }
 
     @Test
+    void teste_limiteChequeEspecial_deveEntrarNoLimiteEspecial() {
+        ContaBase contaBase = new ContaBaseTestImpl(500.00, 1000.00);
+    
+        assertThrows(IllegalArgumentException.class, ()->  contaBase.sacar(800), "deve solicitar limite cheque especial");
+        assertEquals(-300, contaBase.getSaldo(), "usa cheque especial");
+    }
+
+    
+    @Test
     void teste_limiteChequeEspecial() {
-        double valorDepositado = 0;
-        double valorDebitado = -1;
-        
-        ContaBase contaBase = new ContaBaseTestImpl(new Cliente("Ana maria", "4633333465"), 0);
-        
-        contaBase.depositar(valorDepositado);
-        
-        
-        
+        ContaBase contaBase = new ContaBaseTestImpl(600.00, 1000.00);
+    
+        contaBase.sacar(1500);
+        assertEquals(-900, contaBase.getSaldo());
+        assertThrows(SaldoInsuficienteException.class, ()->  contaBase.sacar(1500), "Deve lançar que o valor deve ser positivo");
+
     }
 }
