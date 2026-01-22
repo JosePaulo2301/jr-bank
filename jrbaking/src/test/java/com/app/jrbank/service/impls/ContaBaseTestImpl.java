@@ -31,7 +31,6 @@ public class ContaBaseTestImpl implements ContaBase {
     public void sacar(double valor) {
 
         if(valor <= 0) {
-            saldo -= valor;
             throw new IllegalArgumentException("O valor deve ser positivo..");
         }
 

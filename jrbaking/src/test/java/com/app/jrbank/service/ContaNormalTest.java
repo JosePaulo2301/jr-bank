@@ -54,9 +54,9 @@ public class ContaNormalTest {
 
         int origem = 1002;
         int destino = 1003;
-        double valor = 0.15;
+        double valor = 20.15;
 
-        Conta contaOrigem = new Conta(1002, 40.0);
+        Conta contaOrigem = new Conta(1002, 10.0);
         Conta contaDestino = new Conta(1003, 40.0);
 
         Mockito.when(contaRepository.buscarPorNumero(origem)).thenReturn(contaOrigem);

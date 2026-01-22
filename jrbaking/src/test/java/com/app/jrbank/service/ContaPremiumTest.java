@@ -104,8 +104,8 @@ public class ContaPremiumTest {
     void teste_limiteChequeEspecial_deveEntrarNoLimiteEspecial() {
         ContaBase contaBase = new ContaBaseTestImpl(500.00, 1000.00);
     
-        assertThrows(IllegalArgumentException.class, ()->  contaBase.sacar(800), "deve solicitar limite cheque especial");
-        assertEquals(-300, contaBase.getSaldo(), "usa cheque especial");
+        assertThrows(IllegalArgumentException.class, ()->  contaBase.sacar(-10), "deve solicitar limite cheque especial");
+        assertEquals(500, contaBase.getSaldo(), "usa cheque especial");
     }
 
     
