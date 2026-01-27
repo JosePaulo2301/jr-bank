@@ -28,15 +28,17 @@ public class ContaNormalTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-
+     // test [System Under Test]_[Condition or State Change]_[Expected Result]
     @Test
-    void deveDepositarCorretamente() {
+    void testDeposit_When_BalancesIsInsufficient_ShouldReturnTheDeposit() {
         Cliente maria = new Cliente("maira", "11");
         ContaBase conta = new ContaNormal(1001, maria);
 
         conta.depositar(200);
 
-        assertEquals(200, conta.getSaldo(), 0.001);
+        assertEquals(200, conta.getSaldo(), 0.001, "Deve depositar corretamente");
+        assertNotEquals(300, conta.getSaldo(), 0.001, "Deve não esperar um valor diferente");
+        assertNotNull(conta, "Deve existir objeto");
     }
 
     @Test
