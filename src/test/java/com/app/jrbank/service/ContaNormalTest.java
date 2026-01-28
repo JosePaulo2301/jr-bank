@@ -6,9 +6,10 @@ import com.app.jrbank.model.Conta;
 import com.app.jrbank.model.impls.ContaBase;
 import com.app.jrbank.model.impls.ContaNormal;
 import com.app.jrbank.repository.ContaRepository;
-import com.app.jrbank.service.ContaService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -16,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ContaNormalTest {
 
     @Mock
@@ -24,26 +26,41 @@ public class ContaNormalTest {
     @InjectMocks
     private ContaService contaService;
 
+    Cliente maria;
+
     @BeforeEach
-    void setUp() {
+     void setUp() {
         MockitoAnnotations.openMocks(this);
+        maria = new Cliente("maira", "11");
     }
+    /* 
+    @AfterAll
+    @DisplayName("Clean up Tests")
+    @Disabled
+    void cleanUp() {
+
+    }
+*/
      // test [System Under Test]_[Condition or State Change]_[Expected Result]
     @Test
+    @DisplayName("testDeposit_When_BalancesIsInsufficient_ShouldReturnTheDeposit")
     void testDeposit_When_BalancesIsInsufficient_ShouldReturnTheDeposit() {
-        Cliente maria = new Cliente("maira", "11");
+        // AAA-Arrange-Act-Assert
+        // Given - create or difine variables for test
         ContaBase conta = new ContaNormal(1001, maria);
 
+        // When - invoke methods/actions for test
         conta.depositar(200);
 
+        // Then - apply assertions for tests
         assertEquals(200, conta.getSaldo(), 0.001, "Deve depositar corretamente");
         assertNotEquals(300, conta.getSaldo(), 0.001, "Deve não esperar um valor diferente");
         assertNotNull(conta, "Deve existir objeto");
     }
 
     @Test
-    void deveValidarSaldo() {
-        Cliente maria = new Cliente("maria", "11");
+    @DisplayName("testValidated_When_Balance_ShouldReturnBalance")
+    void testValidated_When_Balance_ShouldReturnBalance() {
         ContaBase conta = new ContaNormal(1001, maria);
 
         conta.depositar(200);
@@ -52,7 +69,8 @@ public class ContaNormalTest {
     }
 
     @Test
-    void deveGerarExceptionSaldoInsuficiente() throws SaldoInsuficienteException {
+    @DisplayName("testException_When_Balance_ShouldReturnSaldoInsuficienteExcpetion")
+    void testException_When_Balance_ShouldReturnSaldoInsuficienteExcpetion() throws SaldoInsuficienteException {
 
         int origem = 1002;
         int destino = 1003;
@@ -68,7 +86,9 @@ public class ContaNormalTest {
                 () -> contaService.transferir(
                         contaOrigem.getNumero(),
                         contaDestino.getNumero(),
-                        valor));
+                        valor), "Deve gerar  execption: SaldoInsuficienteException");
+
+                        
     }
 
 }
